@@ -1,7 +1,671 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Project 4 here
-	</body>
-</html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 184 Project 4</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0396c0e2-9a9e-40c4-9e1d-9cc283d69333" class="page sans"><header><h1 class="page-title">CS 184 Project 4</h1></header><div class="page-body"><p id="31b4aca0-6d93-4b9a-bed5-07030eba0901" class=""><strong>Team</strong>: Alex Kristoffersen (akristoffersen@berkeley,edu), Gautam Mittal (gbm@berkeley.edu)</p><p id="addc011b-bfb7-4252-a7e4-3f4c5bf397d5" class=""><strong>Webpage: </strong><a href="https://cal-cs184-student.github.io/sp22-project-webpages-akristoffersen/proj4/index.html">https://cal-cs184-student.github.io/sp22-project-webpages-akristoffersen/proj4/index.html</a></p><h2 id="4c2adf7b-94e2-4369-aefc-1d67e70e845c" class="">Overview</h2><p id="682bc1dd-cd09-4506-abe0-a7055225f8f0" class="">The goal of this project is to simulate the physics of a piece of cloth interacting with other objects using mesh-like structures. We explore the construction of the mesh and various physical constraints with the placement of springs and implement simulation of the cloth’s physics with gravity, spring forces, collisions with spheres and planes, and self-collisions within the cloth itself. We also implement custom shaders to alter the simulated appearance of the cloth and various objects.</p><p id="d492b705-1e89-4094-9daa-16e95e3567fc" class="">
+</p><h3 id="9f4d2760-cef9-4265-9b29-05faa52b1e87" class="">Collaboration</h3><p id="c33826b3-12a9-4bba-9e55-5a8b77d33519" class="">Alex wrote the simulation, object collision, and shader implementations. Gautam wrote the masses and springs and self-collision implementations. Both worked on the report.</p><h2 id="9072a288-506e-4e7d-abe5-9be9f284973a" class="">Task 1</h2><h3 id="50dced40-39ba-424f-b7e2-b2036ca7cb27" class="">Implementation</h3><p id="5255aae6-83e0-4e80-a678-258d1d56a874" class="">Our approach involved first adding all point masses to the grid uniformly spaced apart in 2D in row major (x-axis) order to the <code>point_masses</code> vector. We determined if it was a pinned point based on whether the (x, y) index of the point was in the pinned vector. We set the physical position of each point mass as described in the spec: uniformly 2D on the XY plane if the orientation is vertical with a random z coordinate uniformly drawn from [-1/1000, 1/1000] and uniformly 2D on the XZ plane with a y coordinate set to 1 if the orientation is horizontal.</p><p id="f31f78e1-f3cc-41aa-8eb7-31364813798c" class="">Once the <code>point_masses</code> vector is correctly populated, we loop through all locations in the grid again to add springs with structural, shearing, and bending constraints. As we loop through point masses, we create springs as follows: if there exists a point mass directly above or directly to the left of the current point mass, add structural springs; if there are point masses on the upper left diagonal or upper right diagonal then add shearing springs; if there are point masses two to the left or two above the current point mass, add bending springs.</p><p id="144c3ab3-426c-4ee2-ab3f-c8636cabd37b" class="">We did not run into any difficulty implementing this part of the project, although we discovered in downstream tasks (Part 4) that the way we set the random z-coordinate for the vertically oriented cloth was incorrect due to a casting bug.</p><h3 id="ebf284c5-026d-4371-872a-94cdb3e8d30c" class="">Deliverables</h3><p id="6c7eca20-6df8-4062-94f4-eba42041ffea" class="">Below we show the cloth wireframe with different constraints based on the placement of springs and their associated endpoints on the point mass grid.</p><div id="2b6aa81c-5e04-48e5-b5d2-2e816c816482" class="column-list"><div id="39bf6f95-9081-41cf-9744-ccc396393aac" style="width:33.333333333333336%" class="column"><figure id="308c3aa1-e49b-4c6c-9730-215929b9f115" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_6.59.44_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_6.59.44_PM.png"/></a><figcaption>Cloth wireframe without any shearing constraints</figcaption></figure></div><div id="73e17f7c-bb35-41c9-9bfa-f080fa9327c2" style="width:33.333333333333336%" class="column"><figure id="c66eb220-3ed8-4f11-a9e0-9137366f11ee" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.00.00_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.00.00_PM.png"/></a><figcaption>Wireframe with only shearing constraints</figcaption></figure></div><div id="f3702f95-0f88-4650-afdc-d0805854d830" style="width:33.33333333333333%" class="column"><figure id="3cd771f4-72bd-485a-bb2f-b991b8237a7a" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.00.11_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.00.11_PM.png"/></a><figcaption>Wireframe with all constraints</figcaption></figure></div></div><h2 id="ff221b83-3490-4dd4-8418-690ce77ae573" class="">Task 2</h2><h3 id="22890982-8c7b-4f9d-97b5-765b34564038" class="">Implementation</h3><p id="04f38b50-c38c-45a7-8678-09a4d0bf7888" class=""><strong>2.1</strong></p><p id="af980956-ff51-47ab-a414-9ad4f8269847" class="">We implemented simulation by essentially adding up all acting forces on each vertex, then evaluating its new position with respect to those forces and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">dt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span></span></span><span>﻿</span></span> (<code>delta_t</code>). This was broken up into two sets: external forces and correction forces. For external forces, they act on all point masses equally, so we only needed to add an equivalent force to each point that was not pinned. </p><p id="dcfc8530-13d3-4966-804e-9a6d9649dfa1" class="">
+</p><p id="1f880cc2-251f-4e98-9652-83bfd3fb3408" class="">For correctional forces, we iterate over every spring. If that type of spring is toggled to be on, we can calculate the force applied to the system of two points using Hooke’s Law. If one of the points is pinned, all force goes onto the unpinned point, but otherwise it is split evenly. </p><p id="5daa5b1b-be92-4142-ac1a-b11c0b6aac48" class=""><strong>2.2</strong></p><p id="5c78080b-0dfa-4408-ac9f-c624cc7b48d0" class="">Once all acting forces have been summed for each point, they are integrated using Verlet integration. This is an approximation of the whole formula:</p><p id="d773392e-e569-4576-84bf-a9b51039afbf" class=""><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mi>d</mi><mi>t</mi></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><msub><mi>v</mi><mi>t</mi></msub><mo>∗</mo><mi>d</mi><mi>t</mi><mo>+</mo><msub><mi>a</mi><mi>t</mi></msub><mo>∗</mo><mi>d</mi><msup><mi>t</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x_{t + dt} = x_t + v_t * dt + a_t * dt^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord mathnormal">d</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>. Instead, we can approximate <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">v_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> with the difference of previous and current position:</p><figure id="d40dae15-a0e5-4efd-abc1-2dc914d7b790" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mrow><mi>t</mi><mo>+</mo><mi>d</mi><mi>t</mi></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>d</mi><mo stretchy="false">)</mo><mo>∗</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mi>t</mi></msub><mo>−</mo><msub><mi>x</mi><mrow><mi>t</mi><mo>−</mo><mi>d</mi><mi>t</mi></mrow></msub><mo stretchy="false">)</mo><mo>+</mo><msub><mi>a</mi><mi>t</mi></msub><mo>∗</mo><mi>d</mi><msup><mi>t</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">x_{t + dt} = x_t + (1 - d) * (x_t - x_{t - dt}) + a_t * dt^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">d</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.61528em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8641079999999999em;vertical-align:0em;"></span><span class="mord mathnormal">d</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="59399c9c-d4a4-4c6e-a7c1-f407cc778e85" class="">where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">d</span></span></span></span></span><span>﻿</span></span> is the dampening coefficient. The last position is set as the current position, and this new calculated position replaces the current position of each point.</p><p id="ac494019-6af5-4420-b4a9-476d76d0dec6" class=""><strong>2.3</strong></p><p id="b476c2d2-0d01-48f7-b2b1-2f90c0590ba2" class="">This does cause some deformations, so in order to constrain the system slightly, we can limit the extension of any spring to be at most 10 percent over its original length. The implementation of this was an iteration of every spring after the new points had been calculated, and correcting positions of the two end point masses if any spring became too long.</p><h3 id="fe8695cb-2e70-432c-a873-6afca7829adc" class="">Deliverables</h3><p id="11b0665a-e9d0-4425-80ec-f991e42f1bc9" class=""><strong>Varying </strong><code><strong>ks</strong></code><strong>: </strong>as ks increases, the elasticity of the springs decreases and the mesh remains more taut throughout the simulation. As ks decreases, the springs relax and the mesh stretches more. For the screenshots below, all other parameters are held default (0.2% damping, 15g/cm^2 density).</p><div id="1213eb7d-87a5-4265-a13d-1c07f29394d8" class="column-list"><div id="86f81887-a33e-4eca-b175-8a4e5c583159" style="width:50%" class="column"><figure id="01b98997-5fe7-49a8-9269-37e22c25ed79" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.28.50_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.28.50_PM.png"/></a><figcaption>ks = 5 N/m</figcaption></figure></div><div id="1a2abfea-61dc-4072-b3f7-06891d7a7fa8" style="width:50%" class="column"><figure id="7c746cac-ece8-4dc3-888a-64d08e9dbe51" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.29.24_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.29.24_PM.png"/></a><figcaption>ks = 50000 N/m</figcaption></figure></div></div><p id="d877d3f9-1817-4280-985d-69b22d54bca2" class=""><strong>Varying </strong><code><strong>density</strong></code><strong>: </strong>increasing density causes the cloth to look thinner and more flexible as a result of the mesh density increasing and decreasing density makes the cloth look stiffer and less flexible as the simulation runs. Other parameters are held default.</p><div id="29d29c8e-097e-4699-9ec2-d11933d3571e" class="column-list"><div id="e7309932-bb6a-42ff-b821-ca957dc166fa" style="width:50%" class="column"><figure id="4f7ee359-28f7-49b4-b2d0-9739b43b9afb" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.26.50_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.26.50_PM.png"/></a><figcaption>density = 1 g/cm^2</figcaption></figure></div><div id="065c05c0-6f4b-4222-8b4e-95569d12841d" style="width:50%" class="column"><figure id="ef5e7ff4-9e16-4991-bf81-5805f8d1ed13" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.27.29_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.27.29_PM.png"/></a><figcaption>density = 1000 g/cm^2</figcaption></figure></div></div><p id="d6616d92-4fb3-406a-a955-9bb132af50c6" class=""><strong>Varying </strong><code><strong>damping</strong></code><strong><strong>: </strong></strong>as damping decreases, more energy is preserved and spread throughout the surface as the springs expand and contract, causing the cloth to vibrate much more vigorously as the simulation runs. As damping increases, energy in the springs dissipates much more quickly and the cloth moves much less chaotically as the simulation runs. </p><div id="653585f6-364e-47ba-97b1-94df279b7d39" class="column-list"><div id="403cd00b-abe6-4435-8291-0392bd7d6db5" style="width:50%" class="column"><figure id="2d00f135-3f18-403d-94e3-77b544fcba03" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.30.06_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.30.06_PM.png"/></a><figcaption>damping = 0%, the cloth moves around very chaotically</figcaption></figure></div><div id="4e4f1c8e-45bd-4bf0-a8fe-bae7aaff6538" style="width:50%" class="column"><figure id="37a3a0e0-70d3-44ae-bfc3-1ceea74e6742" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.31.30_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.31.30_PM.png"/></a><figcaption>damping = 0.24%, the cloth is nearly static</figcaption></figure></div></div><figure id="295ca876-514b-47e4-a26e-bcffef5ef359" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.36.06_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.36.06_PM.png"/></a><figcaption>Shaded cloth in final resting state for scene/pinned4.json</figcaption></figure><h2 id="fafa5c94-d623-49e6-a982-81d98f0d7293" class="">Task 3</h2><h3 id="46943ef1-1110-4161-9635-982f4ea1cf5b" class="">Implementation</h3><p id="2dbbead3-9048-4ead-b304-73699fe34fe4" class="">To implement point mass-sphere collisions, we first determine whether the point mass is more than <code>radius</code> distance away from the origin of the sphere. If that is the case, then we return since no correction is needed. If not, we compute a unit difference vector <code>d = normalize(pm.position - origin)</code> and determine the tangent point with <code>origin + d * radius</code>. The correction vector is equal to the difference between the tangent point and the last position of the point mass, and we use this vector to update the point mass’s position by setting it to the last position + the correction vector multiplied by (1 - friction).</p><p id="82471331-a276-45ca-bd24-82461cbe12e7" class="">TODO: plane collision </p><p id="97a3636a-d90c-431a-9174-cc23eefdf5de" class="">We did not run into many issues implementing sphere and plane collisions as the spec was quite clear. The only issue we encountered was accidentally reversing the correction vector which led to parts of the cloth splitting through the plane and sphere surfaces. This was simple to fix by reversing the direction of this vector.</p><h3 id="161c66cb-c790-4b07-8f0b-d4b37bdb1387" class="">Deliverables</h3><p id="c008aa28-d488-439b-9300-419a59c4e45e" class="">Below we show rendered collisions for both a sphere and plane. In the case of a sphere, as the <code>ks</code> increases, the number of folds in the cloth decreases and as it decreases the number of folds in the resting cloth on the sphere increases.</p><div id="14af7c38-ef24-44fe-bf76-3be635afa5d7" class="column-list"><div id="27991e37-75dc-44ad-9478-9b7957c39be3" style="width:50%" class="column"><figure id="bd88c37e-9469-4f1e-aa72-8afffa05056a" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.59.05_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.59.05_PM.png"/></a><figcaption>Default ks = 5000 N/m</figcaption></figure><figure id="c54ceb38-bc5c-4749-94ac-480677b352b5" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.01.28_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.01.28_PM.png"/></a><figcaption>Shaded cloth lying peacefully on a plane (normal shading)</figcaption></figure></div><div id="1a6b9d38-21d0-41ef-844a-a9fd23d4f8cc" style="width:50%" class="column"><figure id="8b742e1a-a6b9-4828-a037-4619267295e4" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.59.44_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.59.44_PM.png"/></a><figcaption>ks = 500 N/m</figcaption></figure><figure id="57d5f769-b729-4f89-b905-1f59e4522639" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.00.09_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.00.09_PM.png"/></a><figcaption>ks = 50000 N/m</figcaption></figure></div></div><h2 id="e34c4283-532c-42e7-a742-424ccf7710d5" class="">Task 4</h2><h3 id="fcdd04fa-7df9-42fe-9091-e95183449d45" class="">Implementation</h3><p id="e3bd251e-f0cb-4b2c-9832-379d9af0bd91" class="">To handle self-collisions, we use a simple procedure to apply a force to the point  masses if they are too close together. To implement this, we use spatial hashing since the naive solution is too slow for real-time rendering. We begin by hashing the points into equally sized 3D partitions. The width of these partitions is 3 * width / num_width_points, the height is 3 * height / num_height_points, and the length is max(box width, box height). We quantize a point mass’s position to one of these boxes by dividing the x, y, and z coordinates by the partition height, width, and length respectively. We then pass this quantized 3D coordinate associated with a partition to a hash function defined by: <code>hash(x, y, z) = x * 11 + y * 11^2 + z * 11^3</code>. where x, y, z are the quantized coordinates. We then cast this hash value to the float.</p><p id="09c4fdee-c261-4025-86f7-f51d4fc8ffd3" class="">We populate the spatial map by looping over all point masses and using their positional hash to determine which list of point masses to add them to. This makes finding nearby point masses much more efficient in the downstream correction process.</p><p id="c1d5f906-d0ef-40e6-af02-efd811d60477" class="">To handle self-collisions for a given point mass, we first find a set of nearby candidate point masses with the spatial hash map using the given point mass’s position. We then loop over all candidates (that are not the given point mass) and find candidates where the distance between the candidate and the given point mass is less than 2 * thickness. For those point masses, we compute a difference vector <code>d</code> between the two point masses and determine the correction amount <code>c = 2 * thickness - length(d)</code>. We compute an individual correction vector with <code>normalize(d) * c</code> and add that to a running sum of correction vectors. After we have looped through all candidates, if there are any corrections we average the running sum by the total number of corrections and scale down by the number of simulation steps to improve the accuracy. We then adjust the given point mass’s position by this reduced correction vector.</p><p id="cb58dd3c-e5f9-43ca-b7e6-c66b001a68ce" class="">In the main function for <code>simulate</code>, we first build the spatial hash map and then loop over all point masses and call <code>self_collide</code> on each of them with the current simulation step count.</p><p id="1ee6a304-794a-4a02-a003-5d3e3179c1f4" class="">Most of the implementation was fairly straightforward in terms of recreating the process described in the spec, but we experienced one big challenge related to the cloth remaining mostly static and vibrating but not folding even after the implementation was complete. We found that this was related to a casting issue in Part 1 when setting the random z-coordinate for each point masses position. Once that casting issue was resolved the random coordinates were correctly initialized and the cloth began to fold as expected. </p><h3 id="ccd07c32-ecd1-4faa-b1eb-fde9b732a1d8" class="">Deliverables</h3><p id="a8362f03-9464-4549-a568-d356fb0b2c38" class="">After implementing this, the cloth folds on itself and does not clip into itself. Below screenshots use the default settings of 15g/cm^2 density and 5000 N/m for ks.</p><div id="43716815-e558-4aa8-9d43-8c52da9b47b7" class="column-list"><div id="a98e9958-ee96-4aa1-986e-c41b36f2e2c0" style="width:50%" class="column"><figure id="a1d3a661-0ead-4a8f-ad3e-4e762a8ef937" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.25.03_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.25.03_PM.png"/></a><figcaption>Early self-collision</figcaption></figure><figure id="df743191-d694-4e0a-a757-0be979e45968" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.26.29_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.26.29_PM.png"/></a><figcaption>Final resting state</figcaption></figure></div><div id="b3744d1c-f4a1-449f-a897-c2c8e7351738" style="width:50%" class="column"><figure id="16c709cf-ab08-4b7a-ae4e-373a3de1a1eb" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.25.37_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.25.37_PM.png"/></a><figcaption>Mid self-collision</figcaption></figure><figure id="1072fb05-d54c-4408-939f-373cfad35496" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.26.41_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.26.41_PM.png"/></a><figcaption>(Another viewing angle of) final resting state</figcaption></figure></div></div><p id="a59ad931-8a70-47e9-9606-4873da58bb4a" class=""><strong>Varying </strong><code><strong>density</strong></code><strong>: </strong>Increasing the density causes the folds to be much smaller and the cloth to fall more slowly while decreasing density creates much larger folds and causes the cloth to fall more quickly. In all screenshots below, ks is maintained at 5000 N/m.</p><div id="51df4026-1a2b-4015-a7a2-8344c3ec0c23" class="column-list"><div id="9b694910-6ee6-48ec-a785-15af59a45140" style="width:50%" class="column"><figure id="ce5fd445-20cd-4128-a890-6504c900e5d3" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.40.43_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.40.43_PM.png"/></a><figcaption>early self-collisions with density = 150g/cm^2</figcaption></figure></div><div id="10d0b4c3-f766-4b5b-a02f-01a163d36661" style="width:50%" class="column"><figure id="420666fb-5d7d-4e6d-95a6-7c288d4f1a4e" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.41.27_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.41.27_PM.png"/></a><figcaption>resting state with density = 150g/cm^2</figcaption></figure></div></div><div id="01874cfe-44c4-49dc-af63-f38d7857ceff" class="column-list"><div id="173c0ad7-3940-47e2-8260-3f394546aeee" style="width:50%" class="column"><figure id="d4fee665-f61f-423e-ba31-ec6d37984b47" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.42.36_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.42.36_PM.png"/></a><figcaption>early self-collisions with density = 1.5g/cm^2</figcaption></figure></div><div id="69a20b30-e61e-402a-b18f-d972462ed3d1" style="width:50%" class="column"><figure id="5c9d61f2-20b4-491a-adc0-d99a68f01312" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.43.50_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.43.50_PM.png"/></a><figcaption>resting state with density = 1.5g/cm^2</figcaption></figure></div></div><p id="48a44918-3daf-4d1a-bfff-0a4be6d2ff5c" class=""><strong>Varying </strong><code><strong>ks</strong></code><strong>: </strong>Decreasing ks causes many more smaller folds and causes the final folded stack as a result to be taller and the cloth to fall more slowly. Increasing ks creates fewer, larger folds with the final stack being smaller and the cloth to fall more quickly. In all screenshots, density is maintained at 15g/cm^2.</p><div id="d459acaa-6a53-4b4d-8f62-a63819693a44" class="column-list"><div id="cbac4441-407a-4e30-acfc-11ad001c8128" style="width:50%" class="column"><figure id="459ba22e-1519-4f24-8b32-be03cd34af48" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.44.33_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.44.33_PM.png"/></a><figcaption>early self-collisions with ks = 500 N/m.</figcaption></figure></div><div id="7a056783-2ff9-4882-b22a-a00953aa17a1" style="width:50%" class="column"><figure id="c672b830-151d-42cf-90bd-5fe5770fb35e" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.45.20_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.45.20_PM.png"/></a><figcaption>resting state with ks = 500 N/m.</figcaption></figure></div></div><div id="0628f55b-662d-40c1-b6b9-0818e065835f" class="column-list"><div id="b8750a23-d26f-4fa9-a593-ed9ec6be0a50" style="width:50%" class="column"><figure id="293ffb82-6f56-4903-8cea-b8abf57c0eed" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.45.59_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.45.59_PM.png"/></a><figcaption>early self-collisions with ks = 50000 N/m.</figcaption></figure></div><div id="3ea2d819-20d1-414c-a856-d6905c6c26eb" style="width:50%" class="column"><figure id="ec79e11a-b498-4e2b-bca3-b799df5ac53c" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.49.33_PM.png"><img style="width:1136px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_7.49.33_PM.png"/></a><figcaption>resting state with ks = 50000 N/m.</figcaption></figure></div></div><h2 id="09843ddd-35b1-49bb-a30b-70799b7267e6" class="">Task 5</h2><h3 id="263fa963-275d-4b05-a2ba-d480fe53ac1e" class="">Shader Programs</h3><p id="24bfa6ab-6be1-442d-b077-f3d55ee79564" class="">Shader programs define how a scene is rendered on screen through hard-coded functions, which are then optimized to run quickly on GPU.  This can be split up into two separate sections: vertex and fragment shaders.</p><ul id="c7b6d660-f58b-43ba-a447-0a8a1ff3f1d8" class="bulleted-list"><li style="list-style-type:disc"><strong>Vertex Shaders </strong>modify the positions of vertices in the model, taking input positions, normals, tangents, etc, and writing the final position of the vertex to <code>gl_Position</code>.</li></ul><ul id="548612c9-02b1-4750-95bf-0e221f9f7d1a" class="bulleted-list"><li style="list-style-type:disc"><strong>Fragment Shaders </strong>run operations on individual fragments/pixels, which take in the vertex positions/geometry attributes from the vertex shader and write the final color to <code>out_color</code>.</li></ul><p id="3b9b4000-0b0a-450f-9f74-5d482ea04321" class="">Together, these programs can be compiled and linked, then evaluated quickly to create the scene rendering.</p><h2 id="230f401f-902f-4087-8b5b-0358acd10e53" class="">Implementation</h2><p id="00a24488-cacc-4514-8209-673b9e30eee2" class="">To implementation the shader programs, one creates GLSL shader code, which is similar to C. For each of the fragment shader models, we modified the shader code to output an <code>out_color</code> depending on the viewing direction, light source position and direction, etc. Each section will go in more detail:</p><h3 id="5b540d70-0b74-4383-bcf7-f80c5ca05616" class="">Diffuse Shading</h3><p id="a2d3e3a2-220f-4188-8795-ac75d6ff1c28" class=""><strong>Implementation</strong></p><p id="e015035d-ed26-471c-98d5-c006cc15ae95" class="">The diffuse shading model was created by implementing the diffuse lighting formula:</p><figure id="7e8de5d2-6f5d-4d0c-a76a-719cbb744a29" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>L</mi><mi>d</mi></msub><mo>=</mo><msub><mi>k</mi><mi>d</mi></msub><mo stretchy="false">(</mo><mi>I</mi><mi mathvariant="normal">/</mi><msup><mi>r</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>n</mi><mo>⋅</mo><mi>l</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">L_d = k_d (I / r^2) \max (0, n \cdot l)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="03b2645f-8ce9-4156-938f-dd18c9f8271b" class="">where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>k</mi><mi>d</mi></msub></mrow><annotation encoding="application/x-tex">k_d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> is the diffuse coefficient, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span></span></span></span></span><span>﻿</span></span> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi></mrow><annotation encoding="application/x-tex">r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span></span><span>﻿</span></span> relate to the light source intensity and distance. The whole this varies over the angle between the normal direction of the vertex on the mesh and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi></mrow><annotation encoding="application/x-tex">l</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span></span></span></span></span><span>﻿</span></span>, the outgoing direction from the vertex to the light source. </p><h3 id="459edd7f-2efa-4142-a764-b8d957b2414e" class="">Blinn-Phong Shading Model</h3><p id="1024f960-86cd-4dfa-8217-a376abf83376" class=""><strong>Implementation</strong></p><p id="6e266116-2d70-4339-8b61-29a6bdcd6a3b" class="">The Blinn-Phong shading model is an approximate method for creating realistic-looking renderings that include specular, diffuse, and ambient lighting effects. The ambient component applies light equally regardless of vertex position/normal or viewing direction. The diffuse component applies light variably depending on the vertex normal— scaling with respect to the cosine of the angle between the vertex and a light source. The specular component depends on both the viewing direction and the vertex position/normal:</p><figure id="54ce7641-9554-48a0-a349-b04d4fd763f1" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>L</mi><mtext>specular</mtext></msub><mo>=</mo><msub><mi>k</mi><mi>s</mi></msub><mo stretchy="false">(</mo><mi>I</mi><mi mathvariant="normal">/</mi><msup><mi>r</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mi>max</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>n</mi><mo>⋅</mo><mi>h</mi><msup><mo stretchy="false">)</mo><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">L_\text{specular} = k_s (I / r^2) \max (0, n \cdot h)^p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord text mtight"><span class="mord mtight">specular</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord">/</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">max</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">h</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714392em;"><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="e7f29fe8-7221-40dc-96ca-9254569e19ec" class="">where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">h</span></span></span></span></span><span>﻿</span></span> is the bisector between the viewing direction and the light source direction, and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span> is a exponential hyper-parameter.</p><div id="7ce8849b-060b-4a04-9d90-24b2fe024313" class="column-list"><div id="a6de4e6a-ef9d-4593-b354-c0f91b256d93" style="width:33.333333333333336%" class="column"><figure id="d3ed212e-2636-4a4c-b730-fcda45f392df" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.34.51_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.34.51_PM.png"/></a><figcaption>Ambient Only</figcaption></figure></div><div id="f09e3e26-9e55-412a-810b-8c0b4b57382f" style="width:33.333333333333336%" class="column"><figure id="aae52dbd-a26e-4d6f-82e8-28a91ff50a05" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.35.21_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.35.21_PM.png"/></a><figcaption>Diffuse Only</figcaption></figure></div><div id="639449da-9638-4699-b9d2-0434e98b23e0" style="width:33.33333333333333%" class="column"><figure id="25157e0e-7b00-4f30-bdcf-9f6c2d61dbab" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.35.53_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.35.53_PM.png"/></a><figcaption>Specular Only</figcaption></figure></div></div><figure id="4eb89189-2870-4675-910e-28845ce48fef" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.38.10_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.38.10_PM.png"/></a><figcaption>Full Blinn-Phong</figcaption></figure><h3 id="a625ab9b-0ede-4950-8414-0f2ba7a9b2e6" class="">Texture Mapping</h3><p id="fa72309f-3c4d-48cb-b734-768c6a95ea68" class=""><strong>Implementation</strong></p><p id="38e80f34-3e2b-49cf-8965-63add85d0d6d" class="">Texture mapping was implemented by setting the <code>out_color</code> to be whatever was sampled from <code>texture(sampler2D tex, vec2 uv)</code>, which is a helper function provided by OpenGL to sample from a texture given a texture coordinate <code>uv</code>.</p><figure id="1a3cf2f1-375f-4424-a27e-d2c793a77fb8" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.40.14_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.40.14_PM.png"/></a></figure><h3 id="8eca1681-6545-4bcb-9043-0f7ea63389cc" class="">Bump Mapping</h3><p id="27496206-c125-4f01-929b-3a0bf387eade" class=""><strong>Implementation</strong></p><p id="588e4d29-1c68-4f24-812b-fe1db0a511d8" class="">For bump mapping, the implementation was created by sampling a given texture, converting that value to some height metric, and modifying the normal with respect to this change. For all mapping, we used the scaled dot product of the <code>vec3</code> sampled from the texture as our height metric. A new local normal was created <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>n</mi><mi>o</mi></msub></mrow><annotation encoding="application/x-tex">n_o</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> which was slightly offset with respect to the approximate derivative of the texture at <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>u</mi><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(u, v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>. the final displaced model normal was created converting this local modified normal back into world space with the TBN matrix.</p><div id="7d1a1e45-8201-461f-b194-c5d82fea3843" class="column-list"><div id="d97abeaa-d2bf-4338-bdc2-f23c8074a2f9" style="width:50%" class="column"><figure id="7de9c0c5-09f4-4a28-b4a3-75640331f848" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.47.38_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.47.38_PM.png"/></a></figure></div><div id="e0d1cb45-d45c-41c7-a78d-41cf500b8316" style="width:50%" class="column"><figure id="697c5667-b577-4e43-99a6-34cadff28d78" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.46.49_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.46.49_PM.png"/></a></figure></div></div><h3 id="056e92cb-3c36-4802-9e35-6e7de27ed935" class="">Displacement Mapping</h3><p id="324b2d1f-d1d9-439a-8e96-ed9a7a35341b" class=""><strong>Implementation</strong></p><p id="d64a38a7-c6b3-409f-a6ef-dd59f1fb030c" class="">Displacement mapping was essentially the same structure as bump mapping, except the vertices are shifted in the vertex normal direction through the same height metric function. This is done in a <code>.vert</code> file, which is then rendered using the same bump fragment shader code.</p><div id="5be8138e-16e9-45e4-bcdb-3b274f6f3afb" class="column-list"><div id="23b560e8-f2bb-4871-b5ee-bc41d736029d" style="width:50%" class="column"><figure id="6ec56726-f5ed-4d87-84c1-171da3d7e7a2" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.48.38_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.48.38_PM.png"/></a></figure></div><div id="155f5e61-8997-4efc-967e-5c9489c720ad" style="width:50.000000000000014%" class="column"><figure id="1a75893b-0fa4-470c-bea2-9bd35eb95b81" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.49.19_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.49.19_PM.png"/></a></figure></div></div><p id="edd41e09-a8bc-499e-bff1-218714966171" class="">While both do show differences in lighting effects with the texture, the displacement shader brings out a lot more of the specular highlights than the bump mapping, as the updated vertices jut out more prominently than it does on the un-modified mesh created by the bump map.</p><div id="fe24a576-d106-4367-bfcf-356d9d0f0e99" class="column-list"><div id="d4b66547-fe51-428f-bf41-d2fd8257fadb" style="width:50%" class="column"><figure id="44982ddd-b38c-4f9b-af09-c11976342f31" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.52.28_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.52.28_PM.png"/></a><figcaption>bump, 16/16</figcaption></figure></div><div id="d181821d-4cf3-46c7-b0c4-abfded2a200e" style="width:50%" class="column"><figure id="b79c1026-044a-4955-8bb0-2664b1b230da" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.53.03_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.53.03_PM.png"/></a><figcaption>displacement, 16/16</figcaption></figure></div></div><div id="9cbedc24-04f5-4c69-9607-4ae7bd7134dc" class="column-list"><div id="dd070766-99f3-40e3-bad1-e7f1085e3e5a" style="width:50%" class="column"><figure id="128ea5ce-d5b5-47f5-ad8e-113be13f9717" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.53.34_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.53.34_PM.png"/></a><figcaption>bump, 128/128</figcaption></figure></div><div id="f8ac4053-dec1-4432-8dbb-4951e013c063" style="width:50%" class="column"><figure id="bad218ef-2b07-4075-9620-a32279d121fa" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.53.53_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.53.53_PM.png"/></a><figcaption>displacement, 128/128</figcaption></figure></div></div><p id="dd9d3b95-c63a-4965-9157-e7593f159699" class="">The bump shader stays more consistent between the mesh coarseness. This makes sense, as the mesh is not being modified and therefore the changes in rendering at a higher mesh count would not be very significant. However, the displacement result becomes much more realistic and improved with the increased mesh count. This is because there are less ‘jaggies’ on the mesh, and the displacements become more smooth.</p><h3 id="2a951440-fc0c-4479-accc-f83d4b26bb55" class="">Mirror Shader</h3><p id="1087d1d4-0293-4020-b1aa-b9285703332e" class=""><strong>Implementation</strong></p><p id="3e83a940-62e8-4091-b6a7-110a4443f492" class="">The mirror shader was created by first calculating the reflected ray direction from the vertex normal and the viewing direction. This was calculated using:</p><figure id="474d3d2b-ecf0-47db-a4b1-777a58e1d313" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>v</mi><mtext>reflection</mtext></msub><mo>=</mo><msub><mi>v</mi><mtext>incoming</mtext></msub><mo>−</mo><mn>2</mn><mo>∗</mo><mtext>dot</mtext><mo stretchy="false">(</mo><msub><mi>v</mi><mtext>incoming</mtext></msub><mo separator="true">,</mo><mi>n</mi><mo stretchy="false">)</mo><mo>∗</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">v_\text{reflection} = v_\text{incoming} - 2 * \text{dot}(v_\text{incoming}, n) * n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord text mtight"><span class="mord mtight">reflection</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8694379999999999em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.317502em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord text mtight"><span class="mord mtight">incoming</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord text"><span class="mord">dot</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.317502em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord text mtight"><span class="mord mtight">incoming</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span></span></div></figure><p id="8327e151-e4e8-494c-abcf-966239b6c336" class="">The reflection vector direction was then used to sample the texture cubemap <code>u_texture_cubemap</code> with the same texture helper function used earlier.</p><div id="742c1dc6-dfbb-46c3-bfea-969d90fa99c1" class="column-list"><div id="2df0f4de-fadb-4e1c-ad22-0687cbe3eebe" style="width:50%" class="column"><figure id="fe76fd32-8184-4214-88e6-ac5b90b5f8aa" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.58.25_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.58.25_PM.png"/></a></figure></div><div id="86e68566-61f4-410e-98d2-e2e8472dd637" style="width:50%" class="column"><figure id="2345df17-3fce-4d02-b786-96a80e5392d4" class="image"><a href="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.59.40_PM.png"><img style="width:2272px" src="CS%20184%20Pro%20308c3/Screen_Shot_2022-04-16_at_8.59.40_PM.png"/></a></figure></div></div></div></article></body></html>
